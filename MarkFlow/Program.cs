@@ -1,10 +1,13 @@
 using MarkFlow.Components;
+using MarkFlow.FileService;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddScoped<IFileService, FileService>();
 
 var app = builder.Build();
 
