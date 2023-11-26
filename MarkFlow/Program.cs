@@ -7,7 +7,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddScoped<IFileService, FileService>();
+
+if (args.Length != 1)
+{
+    throw new ArgumentException("You must provide a path to a file.");
+}
+
+var path = args[0];
+
+builder.Services.AddScoped<IFileService>(provider => new FileService(path));
 
 var app = builder.Build();
 
