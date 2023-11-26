@@ -1,9 +1,17 @@
 ﻿@page "/"
 
+@attribute [StreamRendering(true)]
+
+@rendermode InteractiveServer
+
+@using Microsoft.JSInterop
 @using MarkFlow.FileService
 @using Markdig
 
 @inject IFileService FileService
+@inject NavigationManager NavigationManager
+
+@inject IJSRuntime JSRuntime
 
 <div class="wrapper">
   @if (@Html is not null)
@@ -12,19 +20,33 @@
   }
   else
   {
-    <p>Loading...</p>
+    <p>loading...</p>
   }
 </div>
+
 @code {
-  private MarkupString? Html { get; set; }
+    private MarkupString? Html { get; set; }
 
-  protected override async Task OnInitializedAsync()
-  {
-    if (FileService is null) return;
+    protected override async Task OnInitializedAsync()
+    {
+        if (FileService is null) return;
 
-    var markdown = await FileService.ReadFileAsync();
-    Html = (MarkupString)Markdown.ToHtml(markdown);
+        FileService.OnFileChanged += FileChanged;
+        FileService.MonitorFile();
 
-    await base.OnInitializedAsync();
-  }
+        await LoadFileContent();
+    }
+
+    private async Task FileChanged()
+    {
+        await LoadFileContent();
+
+        NavigationManager.NavigateTo("/", true);
+    }
+
+    private async Task LoadFileContent()
+    {
+        var markdown = await FileService.ReadFileAsync();
+        Html = (MarkupString)(Markdown.ToHtml(markdown));
+    }
 }

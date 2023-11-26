@@ -6,8 +6,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
-
+/*
+builder.Services.AddRazorComponents()
+    .AddInteractiveServerComponents()
+    .AddInteractiveWebAssemblyComponents();
+*/
 if (args.Length != 1)
 {
     throw new ArgumentException("You must provide a path to a file.");
@@ -34,5 +37,10 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
+
+
+//app.MapRazorComponents<App>()
+//    .AddInteractiveServerRenderMode()
+//    .AddInteractiveWebAssemblyRenderMode();
 
 app.Run();
