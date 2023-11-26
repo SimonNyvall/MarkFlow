@@ -1,24 +1,29 @@
 ﻿@page "/"
 
 @using MarkFlow.FileService
+@using Markdig
 
 @inject IFileService FileService
 
-<pagetitle>home</pagetitle>
-
-<h1>hello, world!</h1>
-
-welcome to your new app.
-@Markdown
-
+<div class="wrapper">
+  @if (@Html is not null)
+  {
+    @Html
+  }
+  else
+  {
+    <p>Loading...</p>
+  }
+</div>
 @code {
-  private string Markdown { get; set; } = string.Empty;
+  private MarkupString? Html { get; set; }
 
   protected override async Task OnInitializedAsync()
   {
     if (FileService is null) return;
 
-    Markdown = await FileService.ReadFileAsync("/README.md");
+    var markdown = await FileService.ReadFileAsync();
+    Html = (MarkupString)Markdown.ToHtml(markdown);
 
     await base.OnInitializedAsync();
   }
