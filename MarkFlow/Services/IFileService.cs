@@ -2,5 +2,5 @@ namespace MarkFlow.FileService;
 
 public interface IFileService
 {
-  Task<string> ReadFileAsync(string path);
+    Task<string> ReadFileAsync();
 }
