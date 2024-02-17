@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkFlow", "MarkFlow\MarkFlow.csproj", "{6D646342-E6E6-43D6-A281-34B4FFC37027}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkFlow", "src\MarkFlow.csproj", "{6D646342-E6E6-43D6-A281-34B4FFC37027}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkFlow.Tests", "MarkFlow.Tests\MarkFlow.Tests.csproj", "{FDC69098-94CC-4AA8-90A1-F6D86AA51CE4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkFlow.Tests", "tests\MarkFlow.Tests.csproj", "{FDC69098-94CC-4AA8-90A1-F6D86AA51CE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
